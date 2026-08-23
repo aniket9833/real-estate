@@ -7,7 +7,7 @@ export const ALLOWED_MIME_TYPES = [
   'image/png',
   'image/webp',
 ] as const;
-export const MAX_FILE_SIZE_BYTES = 8 * 1024 * 1024; // 8MB per image, generous for phone camera photos
+export const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5MB per image, generous for phone camera photos
 export const MAX_IMAGES_PER_PROPERTY = 12;
 
 export class UploadValidationError extends Error {}
