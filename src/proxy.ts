@@ -1,14 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySessionToken, SESSION_COOKIE_NAME } from '@/lib/jwt';
 
-/**
- * Route-level gate for the admin area. This runs on the Edge runtime before
- * any admin page renders, so an unauthenticated visitor never sees admin UI
- * flash before redirecting. Individual server actions/route handlers still
- * re-verify the session independently - middleware is defense in depth, not
- * the only check.
- */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isAdminRoute =

@@ -11,9 +11,9 @@ export class InvalidCredentialsError extends Error {
 
 /**
  * Node-only: touches Mongoose and bcrypt. Import this only from Server
- * Actions / Route Handlers (Node runtime) - never from middleware.ts, which
+ * Actions / Route Handlers (Node runtime) - never from proxy.ts, which
  * runs on the Edge runtime and cannot bundle these modules. For session
- * verification in middleware, import verifySessionToken from "@/lib/jwt"
+ * verification in proxy, import verifySessionToken from "@/lib/jwt"
  * directly instead.
  */
 export async function login(

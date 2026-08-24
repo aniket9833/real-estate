@@ -2,7 +2,7 @@ import { SignJWT, jwtVerify } from 'jose';
 
 /**
  * Edge-safe JWT helpers only - no Mongoose/bcrypt imports here. This file is
- * imported by middleware.ts, which runs on the Edge runtime and cannot bundle
+ * imported by proxy.ts, which runs on the Edge runtime and cannot bundle
  * Node-only modules like Mongoose. Node-side auth logic (login, password
  * hashing) lives in services/auth.service.ts instead.
  */
