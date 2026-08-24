@@ -1,15 +1,29 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-light: var(--primary-light);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
+  --color-status-available: var(--status-available);
+  --color-status-reserved: var(--status-reserved);
+  --color-status-sold: var(--status-sold);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+  --font-display: var(--font-fraunces);
+  --font-heading: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,38 +63,46 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #f8f7f2;
+  --foreground: #20302c;
+  --ink: #20302c;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #20302c;
+  --popover: #ffffff;
+  --popover-foreground: #20302c;
+  --primary: #164b43;
+  --primary-foreground: #fffdf8;
+  --primary-light: #286b5f;
+  --secondary: #e7eee8;
+  --secondary-foreground: #164b43;
+  --muted: #65736e;
+  --muted-foreground: #65736e;
+  --accent: #d29d45;
+  --accent-foreground: #243128;
+  --accent-light: #f0c978;
+  --accent-dark: #986a22;
+  --status-available: #287d58;
+  --status-reserved: #a66a19;
+  --status-sold: #b1443d;
+  --destructive: #b1443d;
+  --border: #d9e1da;
+  --input: #cbd7cf;
+  --ring: #d29d45;
+  --chart-1: #164b43;
+  --chart-2: #d29d45;
+  --chart-3: #287d58;
+  --chart-4: #65736e;
+  --chart-5: #b1443d;
+  --radius: 0.75rem;
+  --sidebar: #edf2ed;
+  --sidebar-foreground: #20302c;
+  --sidebar-primary: #164b43;
+  --sidebar-primary-foreground: #fffdf8;
+  --sidebar-accent: #e1ebe3;
+  --sidebar-accent-foreground: #164b43;
+  --sidebar-border: #d9e1da;
+  --sidebar-ring: #d29d45;
 }
 
 .dark {
@@ -127,4 +149,88 @@
   html {
     @apply font-sans;
   }
+
+  body {
+    min-width: 320px;
+  }
+}
+
+@utility container {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 640px) {
+    padding-inline: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-inline: 3rem;
+  }
+}
+
+@utility section-pad {
+  padding-block: 4.5rem;
+
+  @media (min-width: 768px) {
+    padding-block: 6.5rem;
+  }
+}
+
+@utility shadow-card {
+  box-shadow: 0 14px 35px rgb(32 48 44 / 0.08);
+}
+
+@utility shadow-soft {
+  box-shadow: 0 8px 24px rgb(32 48 44 / 0.12);
+}
+
+@utility bg-topo {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgb(255 255 255 / 0.2) 1px,
+    transparent 0
+  );
+  background-size: 18px 18px;
+}
+
+@utility eyebrow {
+  color: var(--accent-dark);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-up {
+  animation: fade-up 650ms ease-out both;
+}
+
+@keyframes stamp-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85) rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@utility animate-stamp-in {
+  animation: stamp-in 500ms ease-out both;
 }

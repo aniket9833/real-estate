@@ -11,7 +11,7 @@ export function Hero() {
         className="absolute inset-0 bg-topo bg-repeat opacity-[0.08]"
         aria-hidden
       />
-      <div className="container relative section-pad grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+      <div className="container relative section-pad grid lg:grid-cols-2 gap-12 items-center">
         <div className="animate-fade-up">
           <span className="eyebrow text-accent-light">Akola, Maharashtra</span>
           <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] tracking-tight">
@@ -52,9 +52,9 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative aspect-[4/5] lg:aspect-[4/5] rounded-2xl bg-primary-light/40 border border-primary-foreground/10 overflow-hidden">
+        <div className="relative aspect-4/5 max-w-xl w-full justify-self-center lg:justify-self-end rounded-2xl bg-primary-light/40 border border-primary-foreground/10 overflow-hidden">
           {/* Placeholder for a hero photograph of an Akola plot / office - replace with real photography */}
-          <div className="absolute inset-0 flex items-center justify-center text-primary-foreground/40 text-sm text-center px-8">
+          <div className="absolute inset-0 flex items-center justify-center text-primary-foreground/65 text-sm text-center px-8">
             [ Hero photograph placeholder — verified plot or office photo ]
           </div>
         </div>

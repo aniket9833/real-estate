@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { LayoutDashboard, Building2, Inbox, LogOut } from 'lucide-react';
+import { LayoutDashboard, Building2, Inbox } from 'lucide-react';
 import { getCurrentAdmin } from '@/lib/session';
 import { AdminLogoutButton } from '@/components/admin/logout-button';
 
