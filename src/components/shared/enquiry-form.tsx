@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import * as React from 'react';
+import { useFormStatus } from 'react-dom';
 import { CheckCircle2, Loader2 } from 'lucide-react';
 import {
   submitEnquiryAction,
@@ -41,7 +42,10 @@ export function EnquiryForm({
   showVisitDate,
   onSuccess,
 }: EnquiryFormProps) {
-  const [state, formAction] = useFormState(submitEnquiryAction, initialState);
+  const [state, formAction] = React.useActionState(
+    submitEnquiryAction,
+    initialState,
+  );
 
   if (state.success) {
     if (onSuccess) onSuccess();
