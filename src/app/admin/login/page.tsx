@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import * as React from 'react';
+import { useFormStatus } from 'react-dom';
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Lock, Loader2 } from 'lucide-react';
@@ -25,7 +26,7 @@ function SubmitButton() {
 }
 
 export default function AdminLoginPage() {
-  const [state, formAction] = useFormState(loginAction, initialState);
+  const [state, formAction] = React.useActionState(loginAction, initialState);
   const router = useRouter();
   const searchParams = useSearchParams();
 
