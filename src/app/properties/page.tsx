@@ -18,14 +18,21 @@ export const metadata: Metadata = {
 export default async function PropertiesPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: Promise<{
+    [key: string]: string | string[] | undefined;
+  }>;
 }) {
-  const page = searchParams.page ? Number(searchParams.page) : 1;
+  const params = await searchParams;
+  const getParam = (key: string) => {
+    const value = params[key];
+    return Array.isArray(value) ? value[0] : value;
+  };
+  const page = getParam('page') ? Number(getParam('page')) : 1;
 
   const { items, total, totalPages } = await listProperties({
-    type: searchParams.type,
-    status: searchParams.status,
-    search: searchParams.search,
+    type: getParam('type'),
+    status: getParam('status'),
+    search: getParam('search'),
     page,
     publishedOnly: true,
   });
@@ -79,7 +86,7 @@ export default async function PropertiesPage({
             (pageNum) => (
               <a
                 key={pageNum}
-                href={`?page=${pageNum}${searchParams.type ? `&type=${searchParams.type}` : ''}`}
+                href={`?page=${pageNum}${getParam('type') ? `&type=${getParam('type')}` : ''}${getParam('status') ? `&status=${getParam('status')}` : ''}${getParam('search') ? `&search=${encodeURIComponent(getParam('search')!)}` : ''}`}
                 className={`h-9 w-9 flex items-center justify-center rounded-lg text-sm border ${
                   pageNum === page
                     ? 'bg-primary text-primary-foreground border-primary'
