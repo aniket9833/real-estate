@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import { VerifiedStamp } from '@/components/shared/verified-stamp';
 import { buildWhatsAppLink } from '@/lib/utils';
@@ -53,10 +54,14 @@ export function Hero() {
         </div>
 
         <div className="relative aspect-4/5 max-w-xl w-full justify-self-center lg:justify-self-end rounded-2xl bg-primary-light/40 border border-primary-foreground/10 overflow-hidden">
-          {/* Placeholder for a hero photograph of an Akola plot / office - replace with real photography */}
-          <div className="absolute inset-0 flex items-center justify-center text-primary-foreground/65 text-sm text-center px-8">
-            [ Hero photograph placeholder — verified plot or office photo ]
-          </div>
+          <Image
+            src="https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fHJlYWwlMjBlc3RhdGUlMjBidWlsZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+            alt="Modern real estate building"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+          />
         </div>
       </div>
     </section>

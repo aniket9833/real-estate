@@ -5,7 +5,7 @@ export const siteConfig = {
   description: 'Helping you invest safely in your dream property.',
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+91 77579 37993',
   phoneNumber: process.env.NEXT_PUBLIC_PHONE_NUMBER || '+91 9175707057',
-  email: 'avasyahomes@gmail.com',
+  email: 'avasyahome@gmail.com',
   address: 'Umari Rd, Naka, Chhoti Umari, Akola, Maharashtra 444005',
   officeHours: 'Mon – Sat, 10:00 AM – 7:00 PM',
   mapEmbedUrl:

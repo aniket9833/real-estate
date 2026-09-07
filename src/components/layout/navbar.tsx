@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, MessageCircle } from 'lucide-react';
 import { cn, buildWhatsAppLink } from '@/lib/utils';
@@ -25,16 +26,19 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
       <div className="container flex h-16 md:h-20 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-accent-light font-display text-lg italic">
-            A
-          </span>
-          <span className="font-display text-lg md:text-xl text-primary leading-none">
-            AVASYA
-            <span className="block text-[0.65rem] font-sans tracking-[0.18em] uppercase text-muted mt-0.5 not-italic">
-              Consultants
-            </span>
-          </span>
+        <Link
+          href="/"
+          className="flex items-center group"
+          aria-label="AVASYA home"
+        >
+          <Image
+            src="/images/logo.jpeg"
+            alt="AVASYA Land and Home"
+            width={52}
+            height={52}
+            className="h-12 w-12 object-cover md:h-16 md:w-16"
+            priority
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
