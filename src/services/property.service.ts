@@ -19,7 +19,7 @@ export const propertyInputSchema = z.object({
   status: z.enum(['available', 'reserved', 'sold']).default('available'),
   description: z
     .string()
-    .min(20, 'Please add a fuller description (min 20 characters)')
+    .min(1, 'Please enter a description')
     .max(4000),
   location: z.object({
     area: z.string().min(2),

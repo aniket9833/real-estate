@@ -42,13 +42,12 @@ interface PropertyDetail {
 export const dynamic = 'force-dynamic';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const property = (await getPropertyBySlug(
-    params.slug,
-  )) as PropertyDetail | null;
+  const { slug } = await params;
+  const property = (await getPropertyBySlug(slug)) as PropertyDetail | null;
   if (!property) return { title: 'Property Not Found' };
 
   const description = `${PROPERTY_TYPE_LABELS[property.type]} in ${property.location.area}, Akola — ${formatArea(
@@ -68,9 +67,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PropertyDetailPage({ params }: Props) {
-  const property = (await getPropertyBySlug(
-    params.slug,
-  )) as PropertyDetail | null;
+  const { slug } = await params;
+  const property = (await getPropertyBySlug(slug)) as PropertyDetail | null;
   if (!property) notFound();
 
   incrementViewCount(property._id.toString()).catch(() => {});

@@ -5,7 +5,7 @@ export default function NewPropertyPage() {
     <div>
       <h1 className="font-display text-2xl text-primary mb-1">Add Property</h1>
       <p className="text-sm text-muted mb-6">
-        Fill in the details below. You can save it as a draft and publish later.
+        Add the essentials and publish when you&apos;re ready.
       </p>
       <PropertyForm />
     </div>

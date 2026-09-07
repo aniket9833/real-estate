@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import * as React from 'react';
+import { useFormStatus } from 'react-dom';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -64,7 +65,7 @@ export function PropertyForm({ existing }: { existing?: ExistingProperty }) {
   const boundAction = existing
     ? updatePropertyAction.bind(null, existing._id)
     : createPropertyAction;
-  const [state, formAction] = useFormState(boundAction, initialState);
+  const [state, formAction] = React.useActionState(boundAction, initialState);
   const [images, setImages] = useState<PendingImage[]>([]);
 
   useEffect(() => {
@@ -110,17 +111,20 @@ export function PropertyForm({ existing }: { existing?: ExistingProperty }) {
               ))}
             </select>
           </Field>
-          <Field label="Status" name="status">
-            <select
-              name="status"
-              defaultValue={existing?.status ?? 'available'}
-              className={inputClass(false)}
-            >
-              <option value="available">Available</option>
-              <option value="reserved">Reserved</option>
-              <option value="sold">Sold</option>
-            </select>
-          </Field>
+          {existing && (
+            <Field label="Status" name="status">
+              <select
+                name="status"
+                defaultValue={existing?.status ?? 'available'}
+                className={inputClass(false)}
+              >
+                <option value="available">Available</option>
+                <option value="reserved">Reserved</option>
+                <option value="sold">Sold</option>
+              </select>
+            </Field>
+          )}
+          {!existing && <input type="hidden" name="status" value="available" />}
         </div>
 
         <Field
@@ -153,36 +157,51 @@ export function PropertyForm({ existing }: { existing?: ExistingProperty }) {
               className={inputClass(!!state.fieldErrors?.['location.area'])}
             />
           </Field>
-          <Field label="Landmark (optional)" name="landmark">
-            <input
-              name="landmark"
-              defaultValue={existing?.location.landmark}
-              className={inputClass(false)}
-            />
-          </Field>
-          <Field label="City" name="city">
-            <input
-              name="city"
-              defaultValue={existing?.location.city ?? 'Akola'}
-              className={inputClass(false)}
-            />
-          </Field>
-          <Field label="District" name="district">
-            <input
-              name="district"
-              defaultValue={existing?.location.district ?? 'Akola'}
-              className={inputClass(false)}
-            />
-          </Field>
+          {existing && (
+            <Field label="Landmark (optional)" name="landmark">
+              <input
+                name="landmark"
+                defaultValue={existing?.location.landmark}
+                className={inputClass(false)}
+              />
+            </Field>
+          )}
+          {existing && (
+            <Field label="City" name="city">
+              <input
+                name="city"
+                defaultValue={existing?.location.city ?? 'Akola'}
+                className={inputClass(false)}
+              />
+            </Field>
+          )}
+          {existing && (
+            <Field label="District" name="district">
+              <input
+                name="district"
+                defaultValue={existing?.location.district ?? 'Akola'}
+                className={inputClass(false)}
+              />
+            </Field>
+          )}
         </div>
-        <Field label="Google Maps Link (optional)" name="mapLink">
-          <input
-            name="mapLink"
-            defaultValue={existing?.location.mapLink}
-            placeholder="https://maps.google.com/…"
-            className={inputClass(false)}
-          />
-        </Field>
+        {existing ? (
+          <Field label="Google Maps Link (optional)" name="mapLink">
+            <input
+              name="mapLink"
+              defaultValue={existing?.location.mapLink}
+              placeholder="https://maps.google.com/…"
+              className={inputClass(false)}
+            />
+          </Field>
+        ) : (
+          <>
+            <input type="hidden" name="city" value="Akola" />
+            <input type="hidden" name="district" value="Akola" />
+            <input type="hidden" name="mapLink" value="" />
+            <input type="hidden" name="landmark" value="" />
+          </>
+        )}
       </Section>
 
       <Section title="Size & Price">
@@ -228,51 +247,63 @@ export function PropertyForm({ existing }: { existing?: ExistingProperty }) {
             />
           </Field>
         </div>
-        <Field label="Price Label Override (optional)" name="priceLabel">
-          <input
-            name="priceLabel"
-            defaultValue={existing?.priceLabel}
-            placeholder='e.g. "On Request"'
-            className={inputClass(false)}
-          />
-        </Field>
-        <Field label="Features (comma-separated)" name="features">
-          <input
-            name="features"
-            defaultValue={existing?.features?.join(', ')}
-            placeholder="Corner Plot, Road Facing, Gated Layout"
-            className={inputClass(false)}
-          />
-        </Field>
+        {existing && (
+          <Field label="Price Label Override (optional)" name="priceLabel">
+            <input
+              name="priceLabel"
+              defaultValue={existing?.priceLabel}
+              placeholder='e.g. "On Request"'
+              className={inputClass(false)}
+            />
+          </Field>
+        )}
+        {existing && (
+          <Field label="Features (comma-separated)" name="features">
+            <input
+              name="features"
+              defaultValue={existing?.features?.join(', ')}
+              placeholder="Corner Plot, Road Facing, Gated Layout"
+              className={inputClass(false)}
+            />
+          </Field>
+        )}
+        {!existing && (
+          <>
+            <input type="hidden" name="priceLabel" value="" />
+            <input type="hidden" name="features" value="" />
+          </>
+        )}
       </Section>
 
-      <Section title="Documentation">
-        <label className="flex items-center gap-2.5 text-sm">
-          <input
-            type="checkbox"
-            name="verified"
-            defaultChecked={existing?.documentation.verified}
-            className="h-4 w-4 rounded accent-accent"
-          />
-          Mark as verified property
-        </label>
-        <Field label="Title Type (optional)" name="titleType">
-          <input
-            name="titleType"
-            defaultValue={existing?.documentation.titleType}
-            placeholder="e.g. 7/12 Extract Clear"
-            className={inputClass(false)}
-          />
-        </Field>
-        <Field label="Documentation Notes (optional)" name="docNotes">
-          <textarea
-            name="docNotes"
-            defaultValue={existing?.documentation.notes}
-            rows={3}
-            className={inputClass(false)}
-          />
-        </Field>
-      </Section>
+      {existing ? (
+        <Section title="Documentation">
+          <label className="flex items-center gap-2.5 text-sm">
+            <input
+              type="checkbox"
+              name="verified"
+              defaultChecked={existing?.documentation.verified}
+              className="h-4 w-4 rounded accent-accent"
+            />
+            Mark as verified property
+          </label>
+          <Field label="Title Type (optional)" name="titleType">
+            <input
+              name="titleType"
+              defaultValue={existing?.documentation.titleType}
+              placeholder="e.g. 7/12 Extract Clear"
+              className={inputClass(false)}
+            />
+          </Field>
+          <Field label="Documentation Notes (optional)" name="docNotes">
+            <textarea
+              name="docNotes"
+              defaultValue={existing?.documentation.notes}
+              rows={3}
+              className={inputClass(false)}
+            />
+          </Field>
+        </Section>
+      ) : null}
 
       <Section title="Visibility">
         <div className="flex flex-col sm:flex-row gap-4">
@@ -285,17 +316,29 @@ export function PropertyForm({ existing }: { existing?: ExistingProperty }) {
             />
             Published (visible on the public website)
           </label>
-          <label className="flex items-center gap-2.5 text-sm">
-            <input
-              type="checkbox"
-              name="isFeatured"
-              defaultChecked={existing?.isFeatured ?? false}
-              className="h-4 w-4 rounded accent-accent"
-            />
-            Featured on homepage
-          </label>
+          {existing && (
+            <label className="flex items-center gap-2.5 text-sm">
+              <input
+                type="checkbox"
+                name="isFeatured"
+                defaultChecked={existing.isFeatured}
+                className="h-4 w-4 rounded accent-accent"
+              />
+              Featured on homepage
+            </label>
+          )}
         </div>
+        {!existing && (
+          <>
+            <input type="hidden" name="isFeatured" value="" />
+            <p className="text-xs text-muted">
+              You can feature this property later from the properties list.
+            </p>
+          </>
+        )}
       </Section>
+
+      {!existing && <input type="hidden" name="verified" value="" />}
 
       <Section title={existing ? 'Add More Photos' : 'Photos'}>
         <ImageUploader
