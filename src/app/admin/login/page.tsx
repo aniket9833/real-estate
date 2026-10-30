@@ -25,7 +25,7 @@ function SubmitButton() {
   );
 }
 
-export default function AdminLoginPage() {
+function AdminLoginForm() {
   const [state, formAction] = React.useActionState(loginAction, initialState);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -103,5 +103,25 @@ export default function AdminLoginPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <React.Suspense
+      fallback={
+        <div className="min-h-screen bg-primary flex items-center justify-center px-4">
+          <div
+            role="status"
+            className="flex items-center gap-2 rounded-2xl bg-surface p-8 text-muted shadow-soft"
+          >
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Loading sign-in form...
+          </div>
+        </div>
+      }
+    >
+      <AdminLoginForm />
+    </React.Suspense>
   );
 }
