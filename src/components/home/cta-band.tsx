@@ -22,7 +22,7 @@ export function CtaBand() {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                className={buttonVariants({ variant: 'secondary', size: 'lg' })}
+                className={buttonVariants({ variant: 'whatsapp', size: 'lg' })}
                 href={buildWhatsAppLink(
                   siteConfig.whatsappNumber,
                   "Hi, I'd like to know more about properties in Akola.",

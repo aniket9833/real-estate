@@ -33,7 +33,7 @@ export function PropertyCTA({
 
       <div className="mt-5 flex flex-col gap-3">
         <Button
-          variant="default"
+          variant="whatsapp"
           size="lg"
           className="w-full bg-[#25D366] text-white hover:bg-[#20bd5a]"
           onClick={() =>
@@ -43,7 +43,7 @@ export function PropertyCTA({
           <MessageCircle className="h-5 w-5" /> WhatsApp Us
         </Button>
         <Button
-          variant="default"
+          variant="primary"
           size="lg"
           className="w-full"
           onClick={() => {

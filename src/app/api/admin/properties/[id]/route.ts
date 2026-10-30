@@ -4,13 +4,14 @@ import { getPropertyById, deleteProperty } from '@/services/property.service';
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const admin = await getCurrentAdmin();
   if (!admin)
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const property = await getPropertyById(params.id);
+  const { id } = await params;
+  const property = await getPropertyById(id);
   if (!property)
     return NextResponse.json({ error: 'Property not found' }, { status: 404 });
   return NextResponse.json(property);
@@ -18,14 +19,15 @@ export async function GET(
 
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const admin = await getCurrentAdmin();
   if (!admin)
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   try {
-    await deleteProperty(params.id);
+    const { id } = await params;
+    await deleteProperty(id);
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('DELETE property error:', err);

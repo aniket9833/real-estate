@@ -59,7 +59,7 @@ export function Navbar() {
 
         <div className="hidden md:block">
           <Button
-            variant="default"
+            variant="primary"
             size="default"
             onClick={() =>
               window.open(
@@ -104,7 +104,7 @@ export function Navbar() {
               </Link>
             ))}
             <Button
-              variant="default"
+              variant="primary"
               size="lg"
               className="mt-4 w-full"
               onClick={() =>
